@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+</head>
+<body>
+    {%  block content %}
+    <form action="registration" method ="post">
+    {% csrf_token %}
+        {{ reg_form.as_p }}
+        {% if reg_form.errors %}
+            {% for field in reg_form %}
+                {% for error in field.errors %}
+                    <li style="color:red; background-color:lightpink"><strong>{{ field.label }}</strong>: {{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
+    <input type="submit">
+    </form>
+    {%  endblock %}
+    <div>
+        {%  for message in messages %}
+        <h2>{{ message }}</h2>
+        {%  endfor %}
+    </div>
+</body>
+</html>
